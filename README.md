@@ -31,3 +31,9 @@ To run this project locally, you need the following prerequisites:
 
    ```shell
    git clone https://github.com/your-username/project-name.git
+   
+2. UML diagram:
+![img.png](img.png)
+
+
+
