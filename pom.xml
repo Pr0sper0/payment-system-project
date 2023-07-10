@@ -19,6 +19,14 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.jupiter.version>5.9.3</junit.jupiter.version>
+<<<<<<< Updated upstream
+=======
+    <assertj-core.version>3.24.2</assertj-core.version>
+    <hibernate.version>5.6.15.Final</hibernate.version>
+    <postgresql.version>42.6.0</postgresql.version>
+    <postgresql.testcontainers.version>1.16.0</postgresql.testcontainers.version>
+    <lombok.version>1.18.26</lombok.version>
+>>>>>>> Stashed changes
   </properties>
 
   <dependencyManagement>
@@ -41,6 +49,68 @@
         <version>${junit.jupiter.version}</version>
         <scope>test</scope>
       </dependency>
+<<<<<<< Updated upstream
+=======
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgresql.version}</version>
+<!--        <scope>runtime</scope>-->
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgresql.testcontainers.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+<!--      <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>slf4j-log4j12</artifactId>-->
+<!--        <version>2.0.5</version>-->
+<!--      </dependency>-->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>2.0.7</version>
+        <scope>runtime</scope>
+      </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-api</artifactId>-->
+<!--        <version>2.20.0</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-core</artifactId>-->
+<!--        <version>2.20.0</version>-->
+<!--      </dependency>-->
+>>>>>>> Stashed changes
     </dependencies>
   </dependencyManagement>
 
