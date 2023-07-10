@@ -1,9 +1,16 @@
 package org.val.util;
 
+
 import java.sql.SQLException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import lombok.experimental.UtilityClass;
+import org.hibernate.SessionBuilder;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
@@ -17,6 +24,7 @@ import org.val.entity.User;
 
 @UtilityClass
 public class HibernateUtil {
+
 
   private static volatile SessionFactory sessionFactory;
 
@@ -43,10 +51,8 @@ public class HibernateUtil {
     cfg.addAnnotatedClass(Product.class);
     cfg.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
     cfg.addAttributeConverter(new BirthdayConverter());
-//    cfg.registerTypeOverride(new JsonBinaryType());
 
     return cfg;
   }
-
 
 }

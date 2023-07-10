@@ -98,12 +98,12 @@ public abstract class IntegrationTestBase {
                 FOREIGN KEY (user_id) REFERENCES payments.users (user_id),
                 FOREIGN KEY (product_id) REFERENCES payments.products (product_id)
             );
-                  
+               
                   """;
     private static final String INSERT_SQL = """
             """;
 
-    // @BeforeEach
+
     @SneakyThrows
     void prepareDatabase() {
         Configuration configuration = new Configuration();
@@ -121,12 +121,8 @@ public abstract class IntegrationTestBase {
         }
     }
 
-//    @SneakyThrows
-//    @BeforeEach
     @BeforeEach
     void clearDDL() {
-//        Configuration configuration = new Configuration();
-//        configuration.configure();
 
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
                 Session session = sessionFactory.openSession()) {
@@ -149,3 +145,4 @@ public abstract class IntegrationTestBase {
         }
     }
 }
+
