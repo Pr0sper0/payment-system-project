@@ -13,9 +13,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,11 +59,12 @@ public class User {
   @Column(name="password")
   private String password;
 
-  @Transient
-  @Enumerated(EnumType.STRING)
+
+  @ManyToOne(optional = true, targetEntity = Role.class)
+  @JoinColumn(name = "role_id", referencedColumnName = "id")
   private Role role;
 
-  @Transient
+
   @Enumerated(EnumType.STRING)
   private Gender gender;
 
