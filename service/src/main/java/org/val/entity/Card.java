@@ -3,11 +3,15 @@ package org.val.entity;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,10 +34,7 @@ public class Card {
   @Id
   @Column(name = "id")
   private int id;
-  @Column(name = "card_id")
-  private String cardId;
-  @Column(name = "account_id")
-  private String accountId;
+
   @Column(name = "card_number")
   private String cardNumber;
   @Column(name = "cvv")
@@ -47,6 +48,10 @@ public class Card {
   @Column(name = "deleted_at")
   private Timestamp deletedAt;
 
+  @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+  @JoinColumn(name = "account_id")
+  private Account account;
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -55,19 +60,43 @@ public class Card {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Card that = (Card) o;
-    return id == that.id && Objects.equals(cardId, that.cardId) && Objects.equals(
-        accountId, that.accountId) && Objects.equals(cardNumber, that.cardNumber)
-        && Objects.equals(cvv, that.cvv) && Objects.equals(expirationDate,
-        that.expirationDate) && Objects.equals(createdAt, that.createdAt)
-        && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(deletedAt,
-        that.deletedAt);
+
+    Card card = (Card) o;
+
+    if (id != card.id) {
+      return false;
+    }
+    if (!cardNumber.equals(card.cardNumber)) {
+      return false;
+    }
+    if (!cvv.equals(card.cvv)) {
+      return false;
+    }
+    if (!expirationDate.equals(card.expirationDate)) {
+      return false;
+    }
+    if (!createdAt.equals(card.createdAt)) {
+      return false;
+    }
+    if (!Objects.equals(updatedAt, card.updatedAt)) {
+      return false;
+    }
+    if (!Objects.equals(deletedAt, card.deletedAt)) {
+      return false;
+    }
+    return account.equals(card.account);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cardId, accountId, cardNumber, cvv, expirationDate, createdAt,
-        updatedAt,
-        deletedAt);
+    int result = id;
+    result = 31 * result + cardNumber.hashCode();
+    result = 31 * result + cvv.hashCode();
+    result = 31 * result + expirationDate.hashCode();
+    result = 31 * result + createdAt.hashCode();
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+    result = 31 * result + (deletedAt != null ? deletedAt.hashCode() : 0);
+    result = 31 * result + account.hashCode();
+    return result;
   }
 }

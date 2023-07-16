@@ -27,7 +27,7 @@ public class RoleDaoIT extends IntegrationTestBase {
     public void init() {
         Configuration cfg = buildConfiguration().configure();
         sessionFactory = cfg.buildSessionFactory();
-        roleDao =RoleDao.getInstance(sessionFactory);
+        roleDao = RoleDao.getInstance(sessionFactory);
 
     }
 

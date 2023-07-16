@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -41,8 +42,8 @@ public class User {
   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "user_id")
-  private String userId;
+  @Column(name = "user_name")
+  private String userName;
 
   @Column(name = "name")
   private String name;
@@ -51,6 +52,7 @@ public class User {
   private String surname;
 
   @Column(name = "birthday")
+  @Embedded
   private BirthDay birthday;
 
   @Column(name="email")
@@ -58,7 +60,6 @@ public class User {
 
   @Column(name="password")
   private String password;
-
 
   @ManyToOne(optional = true, targetEntity = Role.class)
   @JoinColumn(name = "role_id", referencedColumnName = "id")
@@ -68,7 +69,7 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Gender gender;
 
-  @OneToMany(mappedBy = "userId")
+  @OneToMany(mappedBy = "user")
   @ToString.Exclude
   private Set<Account> accounts = new HashSet<>();
 

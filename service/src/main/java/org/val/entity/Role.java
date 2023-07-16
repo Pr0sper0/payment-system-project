@@ -1,59 +1,64 @@
 package org.val.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 
 @Entity
-@Builder
-@Setter
-@Getter
-@ToString
-@Table(name = "roles", schema = "payments", catalog = "postgres")
+@Data
 @NoArgsConstructor
+@Builder
+@Table(name = "roles", schema = "payments", catalog = "postgres")
 @AllArgsConstructor
 public class Role {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  private int id;
+  private Integer id;
   @Column(name = "role")
   private String role;
   @Column(name = "description")
   private String description;
   @Column(name = "created_at")
-  private Timestamp createdAt;
+  private LocalDateTime createdAt;
   @Column(name = "updated_at")
-  private Timestamp updatedAt;
+  private LocalDateTime updatedAt;
+
+  @OneToMany(mappedBy = "role")
+  @ToString.Exclude
+  private List<User> users;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+            o)) {
       return false;
     }
-    Role that = (Role) o;
-    return id == that.id && Objects.equals(
-        role, that.role) && Objects.equals(description, that.description)
-        && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt,
-        that.updatedAt);
+    Role role = (Role) o;
+    return getId() != null && Objects.equals(getId(), role.getId());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, role, description, createdAt, updatedAt);
+    return getClass().hashCode();
   }
 }

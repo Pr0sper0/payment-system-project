@@ -22,7 +22,7 @@ public class TestObjects {
 
   public static final User IVAN = User.builder()
           .id(1)
-          .userId("User1")
+          .userName("User1")
           .name("Ivan")
           .surname("Ivanov")
           .birthday(new BirthDay(LocalDate.of(1993, 1, 1)))
@@ -33,6 +33,7 @@ public class TestObjects {
 
   public static final User PETR = User.builder()
           .id(2)
+          .userName("User2")
           .name("Petr")
           .surname("Petrov")
           .birthday(new BirthDay(LocalDate.of(1997, 1, 1)))
@@ -43,6 +44,7 @@ public class TestObjects {
 
   public static final User SERGEY = User.builder()
           .id(3)
+          .userName("User3")
           .name("Sergey")
           .surname("Sergeev")
           .birthday(new BirthDay(LocalDate.of(1990, 1, 1)))

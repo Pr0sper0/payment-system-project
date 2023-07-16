@@ -1,57 +1,53 @@
 package org.val.entity;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Entity
+@Data
+@ToString
+@RequiredArgsConstructor
 @Table(name = "accounts", schema = "payments", catalog = "postgres")
 public class Account {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  @Column(name = "id")
-  private int id;
-  @Column(name = "account_id")
-  private String accountId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
+    private int id;
 
-  @Column(name = "user_id")
-  private String userId;
-  @Column(name = "balance")
-  private BigDecimal balance;
-  @Column(name = "currency")
-  private String currency;
-  @Column(name = "created_at")
-  private Timestamp createdAt;
-  @Column(name = "updated_at")
-  private Timestamp updatedAt;
+    @Column(name = "account_type")
+    private String accountType;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Account that = (Account) o;
-    return id == that.id && Objects.equals(accountId, that.accountId)
-        && Objects.equals(userId, that.userId) && Objects.equals(balance,
-        that.balance) && Objects.equals(currency, that.currency)
-        && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt,
-        that.updatedAt);
-  }
+    @Column(name = "balance")
+    private BigDecimal balance;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, accountId, userId, balance, currency, createdAt, updatedAt);
-  }
+    @Column(name = "currency")
+    private String currency;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
 }

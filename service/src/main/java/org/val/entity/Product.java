@@ -8,30 +8,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Setter
-@Getter
+@Data
 @Builder
 @Entity
 @Table(name = "products", schema = "payments", catalog = "postgres")
+@AllArgsConstructor
 public class Product {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   @Column(name = "id")
   private int id;
-  @Column(name = "product_id")
-  private String productId;
   @Column(name = "name")
   private String name;
   @Column(name = "description")
@@ -53,16 +52,39 @@ public class Product {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Product that = (Product) o;
-    return id == that.id && Objects.equals(productId, that.productId)
-        && Objects.equals(name, that.name) && Objects.equals(description,
-        that.description) && Objects.equals(price, that.price) && Objects.equals(
-        createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt)
-        && Objects.equals(deletedAt, that.deletedAt);
+
+    Product product = (Product) o;
+
+    if (id != product.id) {
+      return false;
+    }
+    if (!name.equals(product.name)) {
+      return false;
+    }
+    if (!Objects.equals(description, product.description)) {
+      return false;
+    }
+    if (!Objects.equals(price, product.price)) {
+      return false;
+    }
+    if (!Objects.equals(createdAt, product.createdAt)) {
+      return false;
+    }
+    if (!Objects.equals(updatedAt, product.updatedAt)) {
+      return false;
+    }
+    return Objects.equals(deletedAt, product.deletedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, productId, name, description, price, createdAt, updatedAt, deletedAt);
+    int result = id;
+    result = 31 * result + name.hashCode();
+    result = 31 * result + (description != null ? description.hashCode() : 0);
+    result = 31 * result + (price != null ? price.hashCode() : 0);
+    result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+    result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+    result = 31 * result + (deletedAt != null ? deletedAt.hashCode() : 0);
+    return result;
   }
 }

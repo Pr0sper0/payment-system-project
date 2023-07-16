@@ -121,7 +121,7 @@ public abstract class IntegrationTestBase {
         }
     }
 
-    @BeforeEach
+    @Test
     void clearDDL() {
 
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

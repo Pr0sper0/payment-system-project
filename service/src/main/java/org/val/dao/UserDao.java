@@ -1,20 +1,5 @@
 package org.val.dao;
 
-
-import org.hibernate.SessionFactory;
-import org.val.entity.User;
-
-public class UserDao extends AbstractDao<Long, User>{
-
-
-  private UserDao(Class<User> clazz, SessionFactory sessionFactory) {
-    super(clazz, sessionFactory);
-
-  }
-
-  public static UserDao getInstance(SessionFactory sessionFactory) {
-    return new UserDao(User.class, sessionFactory);
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +17,7 @@ public class UserDao implements Dao<Long, User>{
   private Transaction currentTransaction;
 
   public Session openCurrentSession() throws SQLException {
-    currentSession = HibernateUtil.buildSessionFactory().openSession();
+    currentSession = HibernateUtil.getSessionFactory().openSession();
     return currentSession;
   }
 

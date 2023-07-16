@@ -1,6 +1,8 @@
 package org.val.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,51 +25,36 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Setter
-@Getter
-@Builder
 @Entity
+@Data
 @Table(name = "orders", schema = "payments", catalog = "postgres")
 public class Order {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Id
-  @Column(name = "id")
-  private int id;
-  @Column(name = "order_id")
-  private String orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
+    private int id;
 
-  @Column(name = "user_id")
-  private String userId;
-  @Column(name = "product_id")
-  private String productId;
-  @Column(name = "status")
-  private String status;
-  @Column(name = "created_at")
-  private Timestamp createdAt;
-  @Column(name = "updated_at")
-  private Timestamp updatedAt;
-  @Column(name = "deleted_at")
-  private Timestamp deletedAt;
+    @Column(name = "status")
+    private String status;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Order that = (Order) o;
-    return id == that.id && Objects.equals(orderId, that.orderId)
-        && Objects.equals(userId, that.userId) && Objects.equals(productId,
-        that.productId) && Objects.equals(status, that.status) && Objects.equals(
-        createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt)
-        && Objects.equals(deletedAt, that.deletedAt);
-  }
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, orderId, userId, productId, status, createdAt, updatedAt, deletedAt);
-  }
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @ManyToOne
+//    Name of column in orsers table
+//    @JoinColumn(name = "product_id")
+    private Product productId;
+
+
 }

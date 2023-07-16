@@ -5,6 +5,7 @@ import static org.val.integration.util.TestObjects.IVAN;
 
 import org.junit.jupiter.api.Test;
 import org.val.dao.RoleDao;
+import org.val.entity.User;
 import org.val.util.HibernateUtil;
 
 public class HibernateRunnerTest {
@@ -17,8 +18,11 @@ public class HibernateRunnerTest {
       var transaction = session.beginTransaction();
 
       session.save(ADMIN);
-      RoleDao roleDao = RoleDao.getInstance(sessionFactory);
-      roleDao.findAll();
+
+      session.save(IVAN);
+      session.clear();
+
+      session.get(User.class, 1L);
       transaction.commit();
     } catch (Exception e) {
       throw new RuntimeException(e);
