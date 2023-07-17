@@ -9,12 +9,20 @@ import org.hibernate.Transaction;
 import org.val.entity.User;
 import org.val.util.HibernateUtil;
 
-@NoArgsConstructor
-public class UserDao implements Dao<Long, User>{
+public class UserDao extends AbstractDao<Long, User>{
 
   private Session currentSession;
 
   private Transaction currentTransaction;
+
+  public UserDao(Class<User> clazz) {
+    super(clazz);
+  }
+
+  public static UserDao getInstance() {
+    return new UserDao(User.class);
+  }
+
 
   public Session openCurrentSession() throws SQLException {
     currentSession = HibernateUtil.getSessionFactory().openSession();

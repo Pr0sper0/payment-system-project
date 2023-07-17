@@ -5,10 +5,8 @@ import org.val.entity.Card;
 
 public class CardDao extends AbstractDao<Long, Card> {
 
-    private SessionFactory sessionFactory;
-
     private CardDao(Class<Card> clazz) {
-        super(clazz, null);
+        super(clazz);
     }
 
     public static CardDao getInstance() {
