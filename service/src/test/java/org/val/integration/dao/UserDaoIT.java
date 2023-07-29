@@ -20,7 +20,7 @@ class UserDaoIT extends IntegrationTestBase {
 
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    UserDao userDao = new UserDao();
+    UserDao userDao = UserDao.getInstance();
 
     @Test
     void testFindAll_WhenUsersAreGiven_ShouldReturnExactSize() {

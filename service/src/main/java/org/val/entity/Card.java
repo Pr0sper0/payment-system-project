@@ -2,6 +2,8 @@ package org.val.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,13 +42,13 @@ public class Card {
   @Column(name = "cvv")
   private String cvv;
   @Column(name = "expiration_date")
-  private Date expirationDate;
+  private LocalDate expirationDate;
   @Column(name = "created_at")
-  private Timestamp createdAt;
+  private LocalDateTime createdAt;
   @Column(name = "updated_at")
-  private Timestamp updatedAt;
+  private LocalDateTime updatedAt;
   @Column(name = "deleted_at")
-  private Timestamp deletedAt;
+  private LocalDateTime deletedAt;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
   @JoinColumn(name = "account_id")

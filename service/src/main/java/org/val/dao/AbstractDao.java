@@ -15,9 +15,9 @@ public abstract class AbstractDao<K extends Serializable, T> implements Dao<K, T
 
     private final Class<T> clazz;
 
-    protected AbstractDao(Class<T> clazz, SessionFactory sessionFactory) {
+    protected AbstractDao(Class<T> clazz) {
         this.clazz = clazz;
-        this.sessionFactory = sessionFactory;
+        this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     public SessionFactory getSessionFactory() {

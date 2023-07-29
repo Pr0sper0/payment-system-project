@@ -5,12 +5,12 @@ import org.val.entity.Role;
 
 public class RoleDao extends AbstractDao<Long, Role> {
 
-    private RoleDao(Class<Role> clazz, SessionFactory sessionFactory) {
-        super(clazz, sessionFactory);
+    private RoleDao(Class<Role> clazz) {
+        super(clazz);
     }
 
-    public static RoleDao getInstance(SessionFactory sessionFactory) {
-        return new RoleDao(Role.class, sessionFactory);
+    public static RoleDao getInstance() {
+        return new RoleDao(Role.class);
     }
 
 
