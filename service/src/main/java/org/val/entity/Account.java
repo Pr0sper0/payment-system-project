@@ -41,7 +41,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "account_type")
     private String accountType;

@@ -4,7 +4,6 @@ import static org.val.integration.util.TestObjects.ADMIN;
 import static org.val.integration.util.TestObjects.IVAN;
 
 import org.junit.jupiter.api.Test;
-import org.val.dao.RoleDao;
 import org.val.entity.User;
 import org.val.util.HibernateUtil;
 

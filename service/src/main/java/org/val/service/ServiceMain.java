@@ -1,4 +1,4 @@
-package org.val.service.main;
+package org.val.service;
 
 import org.val.common.common.CommonMessages;
 

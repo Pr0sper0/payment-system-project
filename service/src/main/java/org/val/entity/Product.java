@@ -30,7 +30,7 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   @Column(name = "id")
-  private int id;
+  private Integer id;
   @Column(name = "name")
   private String name;
   @Column(name = "description")
@@ -55,7 +55,7 @@ public class Product {
 
     Product product = (Product) o;
 
-    if (id != product.id) {
+    if (!id.equals(product.id)) {
       return false;
     }
     if (!name.equals(product.name)) {
