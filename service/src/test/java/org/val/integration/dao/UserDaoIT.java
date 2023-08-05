@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
-import org.val.dao.UserDao;
+import org.val.repository.UserRepository;
 import org.val.entity.User;
 import org.val.integration.IntegrationTestBase;
 import org.val.util.HibernateUtil;
@@ -20,16 +20,16 @@ class UserDaoIT extends IntegrationTestBase {
 
     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-    UserDao userDao = UserDao.getInstance();
+    UserRepository userRepository = UserRepository.getInstance(sessionFactory.openSession());
 
     @Test
     void testFindAll_WhenUsersAreGiven_ShouldReturnExactSize() {
 
         List<User> userList = List.of(IVAN, PETR, SERGEY);
-        userList.forEach(userDao::save);
+        userList.forEach(userRepository::save);
 
-        assertThat(userDao.findAll()).hasSize(3);
-        assertThat(userDao.findAll().get(0).getName()).isEqualTo("Ivan");
+        assertThat(userRepository.findAll()).hasSize(3);
+        assertThat(userRepository.findAll().get(0).getName()).isEqualTo("Ivan");
     }
 
     @Test
@@ -42,7 +42,7 @@ class UserDaoIT extends IntegrationTestBase {
 
             session.save(IVAN);
             session.getTransaction().commit();
-            Optional<User> user = userDao.findById(IVAN.getId());
+            Optional<User> user = userRepository.findById(IVAN.getId());
 
             assertThat(user).isPresent();
             assertThat(user.get()).isEqualTo(IVAN);
@@ -55,22 +55,22 @@ class UserDaoIT extends IntegrationTestBase {
 
     @Test
     void testDelete_WhenUserDeleted_ShouldReturnTrue() {
-        userDao.save(IVAN);
-        boolean isDeleted = userDao.delete(IVAN.getId());
+        userRepository.save(IVAN);
+        boolean isDeleted = userRepository.delete(IVAN.getId());
 
         assertThat(isDeleted).isTrue();
     }
 
     @Test
     void testUpdated_WhenUserUpdated_ShouldReturnUpdatedUser() {
-        userDao.save(IVAN);
+        userRepository.save(IVAN);
         IVAN.setName("Valera");
-        userDao.update(IVAN);
-        Optional<User> user = userDao.findById(IVAN.getId());
+        userRepository.update(IVAN);
+        Optional<User> user = userRepository.findById(IVAN.getId());
 
         assertThat(user).isPresent();
         // assertThat((AssertProvider<Boolean>) () -> user.get().getName().equals("Valera"));
-        Optional<User> resultUser = userDao.findById(IVAN.getId());
+        Optional<User> resultUser = userRepository.findById(IVAN.getId());
         assertThat(resultUser).isPresent();
 
         Predicate<User> predicate = u -> u.getName().equals("Valera");

@@ -49,6 +49,7 @@ public class HibernateUtil {
     cfg.addAnnotatedClass(Card.class);
     cfg.addAnnotatedClass(Order.class);
     cfg.addAnnotatedClass(Product.class);
+
     cfg.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
     cfg.addAttributeConverter(new BirthdayConverter());
 

@@ -3,31 +3,28 @@ package org.val.integration.dao;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.val.integration.util.TestObjects.ADMIN;
 import static org.val.integration.util.TestObjects.USER;
-import static org.val.util.HibernateUtil.buildConfiguration;
 
 import java.util.List;
 import lombok.Cleanup;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.val.dao.RoleDao;
+import org.val.repository.RoleRepository;
 import org.val.entity.Role;
 import org.val.integration.IntegrationTestBase;
+import org.val.util.HibernateUtil;
 
 public class RoleDaoIT extends IntegrationTestBase {
 
-    RoleDao roleDao;
-    private SessionFactory sessionFactory;
+    RoleRepository roleDao;
+    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @BeforeEach
     public void init() {
-//        Configuration cfg = buildConfiguration().configure();
-//        sessionFactory = cfg.buildSessionFactory();
-//        roleDao = RoleDao.getInstance();
+
 
     }
 
@@ -38,16 +35,16 @@ public class RoleDaoIT extends IntegrationTestBase {
 
     @BeforeEach
     public void initializeDatabase() {
-        roleDao = RoleDao.getInstance();
+        @Cleanup Session session = sessionFactory.openSession();
+        roleDao = RoleRepository.getInstance(session);
 
-        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         List<Role> roleList = List.of(ADMIN, USER);
         roleList.forEach(session::save);
 
-        transaction.commit();
-        session.close();
+        session.getTransaction().commit();
+
     }
 
     @AfterEach

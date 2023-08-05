@@ -51,7 +51,6 @@ public class User {
   @Column(name = "surname")
   private String surname;
 
-  @Column(name = "birthday")
   @Embedded
   private BirthDay birthday;
 
