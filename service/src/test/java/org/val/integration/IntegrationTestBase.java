@@ -10,9 +10,20 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.val.util.HibernateUtil;
 
 public abstract class IntegrationTestBase {
+
+    static AnnotationConfigApplicationContext context;
+
+    @BeforeEach
+    void setUp() {
+        context = new AnnotationConfigApplicationContext();
+        context.getEnvironment().setActiveProfiles("dev");
+        context.register(org.val.AppTestConfig.class);
+        context.refresh();
+    }
 
     private static final String CLEAN_SQL = "DELETE FROM payments.users;"
             + "DELETE FROM payments.accounts;"

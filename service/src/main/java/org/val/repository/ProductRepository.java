@@ -9,7 +9,7 @@ public class ProductRepository extends AbstractRepository<Integer, Product> {
         super(Product.class, session);
     }
 
-    public static ProductRepository getInstance(Session session) {
+    public static ProductRepository of(Session session) {
         return new ProductRepository(session);
     }
 }

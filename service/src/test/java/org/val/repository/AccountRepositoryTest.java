@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import lombok.Cleanup;
+import net.bytebuddy.utility.dispatcher.JavaDispatcher.Container;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,16 +22,17 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.val.entity.Account;
 import org.val.entity.Card;
 import org.val.util.HibernateUtil;
 
 public class AccountRepositoryTest {
 
-    private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 
-    private AccountRepository accountRepository = AccountRepository.getInstance(sessionFactory.getCurrentSession());
+    private final AccountRepository accountRepository = AccountRepository.of(sessionFactory.getCurrentSession());
 
     @BeforeEach()
     public void init() {

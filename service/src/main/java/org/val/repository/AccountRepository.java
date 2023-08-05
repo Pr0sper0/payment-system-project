@@ -15,7 +15,7 @@ public class AccountRepository extends AbstractRepository<Long, Account> {
         super(Account.class, session);
     }
 
-    public static AccountRepository getInstance(Session session) {
+    public static AccountRepository of(Session session) {
         return new AccountRepository(session);
     }
 
