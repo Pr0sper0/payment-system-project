@@ -5,13 +5,7 @@ import org.val.entity.Role;
 
 public class RoleRepository extends AbstractRepository<Long, Role> {
 
-    private RoleRepository(Session session) {
+    public RoleRepository(Session session) {
         super(Role.class, session);
     }
-
-    public static RoleRepository of(Session session) {
-        return new RoleRepository(session);
-    }
-
-
 }

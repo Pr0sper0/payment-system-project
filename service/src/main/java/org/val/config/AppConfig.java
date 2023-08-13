@@ -40,12 +40,6 @@ public class AppConfig {
                 (proxy, method, args) -> method.invoke(sessionFactory.openSession(), args));
     }
 
-
-//    @PostConstruct
-//    public void init() {
-//        session = sessionFactory.openSession();
-//    }
-
     @Bean
     public AccountRepository accountRepository(Session session) {
         return new AccountRepository(session);
@@ -63,26 +57,18 @@ public class AppConfig {
 
     @Bean
     public ProductRepository productRepository(Session session) {
-        return ProductRepository.of(session);
+        return new ProductRepository(session);
     }
 
     @Bean
     public RoleRepository roleRepository(Session session) {
-        return RoleRepository.of(session);
+        return new RoleRepository(session);
     }
 
     @Bean
     public UserRepository userRepository(Session session) {
-        return UserRepository.of(session);
+        return new UserRepository(session);
     }
-
-//    @PreDestroy
-//    public void destroy() {
-//        Session session = session();
-//        if (session != null && session.isOpen()) {
-//            session.close();
-//        }
-//    }
 
     @Autowired
     @Lazy
