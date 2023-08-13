@@ -5,21 +5,14 @@ import javax.annotation.PreDestroy;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.proxy.Proxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.val.converter.BirthdayConverter;
-import org.val.entity.Account;
-import org.val.entity.Card;
-import org.val.entity.Order;
-import org.val.entity.Product;
-import org.val.entity.Role;
-import org.val.entity.User;
 import org.val.repository.AccountRepository;
 import org.val.repository.CardRepository;
 import org.val.repository.OrderRepository;
@@ -31,12 +24,8 @@ import org.val.util.HibernateUtil;
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = "org.val")
+@NoArgsConstructor
 public class AppConfig {
-
-
-    private SessionFactory sessionFactory;
-    private Session session;
-
     @Bean
     public SessionFactory sessionFactory() {
         org.hibernate.cfg.Configuration cfg = HibernateUtil.buildConfiguration();
@@ -44,52 +33,56 @@ public class AppConfig {
         return cfg.buildSessionFactory();
     }
 
-    public AppConfig() {
-
+    @Bean
+    public Session session(SessionFactory sessionFactory) {
+        return (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(),
+                new Class[]{Session.class},
+                (proxy, method, args) -> method.invoke(sessionFactory.openSession(), args));
     }
 
-    @Autowired
-    @PostConstruct
-    public void init() {
-        session = sessionFactory.openSession();
+
+//    @PostConstruct
+//    public void init() {
+//        session = sessionFactory.openSession();
+//    }
+
+    @Bean
+    public AccountRepository accountRepository(Session session) {
+        return new AccountRepository(session);
     }
 
     @Bean
-    public AccountRepository accountRepository() {
-        return AccountRepository.of(session);
-    }
-
-    @Bean
-    public CardRepository cardRepository() {
+    public CardRepository cardRepository(Session session) {
         return CardRepository.of(session);
     }
 
     @Bean
-    public OrderRepository orderRepository() {
+    public OrderRepository orderRepository(Session session) {
         return OrderRepository.of(session);
     }
 
     @Bean
-    public ProductRepository productRepository() {
+    public ProductRepository productRepository(Session session) {
         return ProductRepository.of(session);
     }
 
     @Bean
-    public RoleRepository roleRepository() {
+    public RoleRepository roleRepository(Session session) {
         return RoleRepository.of(session);
     }
 
     @Bean
-    public UserRepository userRepository() {
+    public UserRepository userRepository(Session session) {
         return UserRepository.of(session);
     }
 
-    @PreDestroy
-    public void destroy() {
-        if (session != null && session.isOpen()) {
-            session.close();
-        }
-    }
+//    @PreDestroy
+//    public void destroy() {
+//        Session session = session();
+//        if (session != null && session.isOpen()) {
+//            session.close();
+//        }
+//    }
 
     @Autowired
     @Lazy

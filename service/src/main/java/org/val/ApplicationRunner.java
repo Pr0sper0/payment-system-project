@@ -9,7 +9,7 @@ public class ApplicationRunner {
         try (var context = new AnnotationConfigApplicationContext(AppConfig.class)) {
 
             context.getEnvironment().setActiveProfiles("dev");
-            context.refresh();
+//            context.refresh();
         }
     }
 }
