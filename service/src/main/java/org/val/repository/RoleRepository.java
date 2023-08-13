@@ -9,7 +9,7 @@ public class RoleRepository extends AbstractRepository<Long, Role> {
         super(Role.class, session);
     }
 
-    public static RoleRepository getInstance(Session session) {
+    public static RoleRepository of(Session session) {
         return new RoleRepository(session);
     }
 

@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public abstract class AbstractRepository<K extends Serializable, T> implements Repository<K, T> {
+
 
     protected Session session;
 
     private final Class<T> clazz;
 
+    @Autowired
     protected AbstractRepository(Class<T> clazz, Session session) {
         this.clazz = clazz;
         this.session = session;

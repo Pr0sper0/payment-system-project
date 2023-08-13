@@ -9,7 +9,7 @@ public class CardRepository extends AbstractRepository<Long, Card> {
         super(Card.class, session);
     }
 
-    public static CardRepository getInstance(Session session) {
+    public static CardRepository of(Session session) {
         return new CardRepository(session);
     }
 }

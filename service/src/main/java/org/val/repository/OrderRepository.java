@@ -9,7 +9,7 @@ public class OrderRepository extends AbstractRepository<Long, Order> {
         super(Order.class, session);
     }
 
-    public static OrderRepository getInstance(Session session) {
+    public static OrderRepository of(Session session) {
         return new OrderRepository(session);
     }
 
