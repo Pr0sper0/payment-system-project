@@ -7,17 +7,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.val.entity.Account;
 
-public class AccountRepository extends AbstractRepository<Long, Account> {
-
-    private Session session;
-    public AccountRepository(Session session) {
-        super(Account.class, session);
-    }
-
-    public List<Account> findAllWhereCreatedAfter(Session session, String date) {
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Integer> {
+    default public List<Account> findAllWhereCreatedAfter(Session session, String date) {
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         var criteria = criteriaBuilder.createQuery(Account.class);
         Root<Account> accountRoot = criteria.from(Account.class);

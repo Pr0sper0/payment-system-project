@@ -3,7 +3,6 @@ package org.val.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +19,6 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 
@@ -35,7 +33,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "accounts", schema = "payments", catalog = "postgres")
+@Table(name = "accounts", catalog = "postgres")
 public class Account {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

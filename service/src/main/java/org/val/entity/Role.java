@@ -13,10 +13,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
@@ -24,7 +21,7 @@ import org.hibernate.Hibernate;
 @Data
 @NoArgsConstructor
 @Builder
-@Table(name = "roles", schema = "payments", catalog = "postgres")
+@Table(name = "roles", catalog = "postgres")
 @AllArgsConstructor
 public class Role {
 
