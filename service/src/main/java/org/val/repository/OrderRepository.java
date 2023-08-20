@@ -1,17 +1,7 @@
 package org.val.repository;
 
-import org.hibernate.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.val.entity.Order;
 
-public class OrderRepository extends AbstractRepository<Long, Order> {
-
-    private OrderRepository(Session session) {
-        super(Order.class, session);
-    }
-
-    public static OrderRepository of(Session session) {
-        return new OrderRepository(session);
-    }
-
-
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }

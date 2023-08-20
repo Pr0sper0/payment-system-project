@@ -1,8 +1,6 @@
 package org.val.integration.util;
 
 import java.time.LocalDate;
-import org.val.converter.BirthdayConverter;
-import org.val.entity.BirthDay;
 import org.val.entity.Role;
 import org.val.entity.User;
 
@@ -25,7 +23,7 @@ public class TestObjects {
           .userName("User1")
           .name("Ivan")
           .surname("Ivanov")
-          .birthday(new BirthDay(LocalDate.of(1993, 1, 1)))
+          .birthday(LocalDate.of(1993, 1, 1))
           .email("ivan@mail.com")
           .password("111")
           .role(ADMIN)
@@ -36,7 +34,7 @@ public class TestObjects {
           .userName("User2")
           .name("Petr")
           .surname("Petrov")
-          .birthday(new BirthDay(LocalDate.of(1997, 1, 1)))
+          .birthday(LocalDate.of(1997, 1, 1))
           .email("petr@mail.com")
           .password("222")
           .role(USER)
@@ -47,7 +45,7 @@ public class TestObjects {
           .userName("User3")
           .name("Sergey")
           .surname("Sergeev")
-          .birthday(new BirthDay(LocalDate.of(1990, 1, 1)))
+          .birthday(LocalDate.of(1990, 1, 1))
           .email("sergey@mail.com")
           .password("333")
           .role(USER)

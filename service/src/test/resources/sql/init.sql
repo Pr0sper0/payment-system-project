@@ -1,4 +1,4 @@
-CREATE TABLE payments.roles
+CREATE TABLE roles
 (
     id   SERIAL PRIMARY KEY,
     role VARCHAR(32) NOT NULL ,
@@ -7,21 +7,21 @@ CREATE TABLE payments.roles
     updated_at TIMESTAMP DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS payments.users
+CREATE TABLE IF NOT EXISTS users
 (
     id BIGSERIAL PRIMARY KEY ,
     user_id VARCHAR(32) NOT NULL UNIQUE,
     name VARCHAR(64),
     surname VARCHAR(64),
-    birthday DATE NOT NULL ,
+    birthday TIMESTAMP NOT NULL ,
     email VARCHAR(64) NOT NULL UNIQUE ,
     password VARCHAR(64) NOT NULL ,
     role_id SERIAL NOT NULL ,
     gender VARCHAR(16),
-    FOREIGN KEY (role_id) REFERENCES payments.roles (id)
+    FOREIGN KEY (role_id) REFERENCES roles (id)
     );
 
-CREATE TABLE payments.accounts
+CREATE TABLE accounts
 (
     id         SERIAL PRIMARY KEY,
     account_id VARCHAR(32)    NOT NULL UNIQUE,
@@ -30,11 +30,11 @@ CREATE TABLE payments.accounts
     currency   VARCHAR(16)    NOT NULL,
     created_at TIMESTAMP      NOT NULL,
     updated_at TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES payments.users (user_id)
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 
-CREATE TABLE payments.cards
+CREATE TABLE cards
 (
     id SERIAL PRIMARY KEY,
     card_id VARCHAR(32) NOT NULL UNIQUE,
@@ -45,10 +45,10 @@ CREATE TABLE payments.cards
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP,
-    FOREIGN KEY (account_id) REFERENCES payments.accounts (account_id)
+    FOREIGN KEY (account_id) REFERENCES accounts (account_id)
 );
 
-CREATE TABLE payments.products
+CREATE TABLE products
 (
     id SERIAL PRIMARY KEY,
     product_id VARCHAR(32) NOT NULL UNIQUE,
@@ -61,7 +61,7 @@ CREATE TABLE payments.products
 );
 
 
-CREATE TABLE payments.orders
+CREATE TABLE orders
 (
     id SERIAL PRIMARY KEY,
     order_id VARCHAR(32) NOT NULL UNIQUE,
@@ -71,6 +71,6 @@ CREATE TABLE payments.orders
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES payments.users (user_id),
-    FOREIGN KEY (product_id) REFERENCES payments.products (product_id)
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    FOREIGN KEY (product_id) REFERENCES products (product_id)
 );

@@ -1,7 +1,5 @@
 package org.val.entity;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -29,7 +27,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @Entity
-@Table(name = "cards", schema = "payments", catalog = "postgres")
+@Table(name = "cards", catalog = "postgres")
 public class Card {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,15 +1,8 @@
 package org.val.repository;
 
-import org.hibernate.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.val.entity.Card;
 
-public class CardRepository extends AbstractRepository<Long, Card> {
+public interface CardRepository extends JpaRepository<Card, Long> {
 
-    private CardRepository(Session session) {
-        super(Card.class, session);
-    }
-
-    public static CardRepository of(Session session) {
-        return new CardRepository(session);
-    }
 }

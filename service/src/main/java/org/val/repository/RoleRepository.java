@@ -1,11 +1,9 @@
 package org.val.repository;
 
-import org.hibernate.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.val.entity.Role;
 
-public class RoleRepository extends AbstractRepository<Long, Role> {
-
-    public RoleRepository(Session session) {
-        super(Role.class, session);
-    }
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Long> {
 }

@@ -1,11 +1,8 @@
 package org.val.repository;
 
-import org.hibernate.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.val.entity.Product;
 
-public class ProductRepository extends AbstractRepository<Integer, Product> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    public ProductRepository(Session session) {
-        super(Product.class, session);
-    }
 }

@@ -1,11 +1,10 @@
 package org.val.repository;
 
-import org.hibernate.Session;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.val.entity.User;
 
-public class UserRepository extends AbstractRepository<Long, User> {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-  public UserRepository(Session session) {
-    super(User.class, session);
-  }
 }
