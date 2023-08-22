@@ -9,8 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.AbstractApplicationContext;
 
 @Configuration
-@PropertySource("classpath:application.properties")
-@ComponentScan(basePackages = "org.val")
+@PropertySource("classpath:application.yaml")
 @NoArgsConstructor
 public class AppConfig {
 //    @Bean
