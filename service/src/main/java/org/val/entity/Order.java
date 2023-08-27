@@ -45,7 +45,7 @@ public class Order {
 
     @ManyToOne
 //    Name of column in orsers table
-//    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id")
     private Product productId;
 
 
