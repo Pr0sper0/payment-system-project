@@ -4,9 +4,9 @@ INSERT INTO roles (role, description, created_at) VALUES ('User', 'Regular User 
 
 --users
 INSERT INTO users (user_name, name, surname, birthday, email, password, role_id, gender)
-VALUES ('admin', 'Admin', 'User', '1990-01-01', 'admin@example.com', 'hashedpassword', 1, 'MALE');
+VALUES ('admin', 'Admin', 'User', '1990-01-01', 'admin@example.com', 'hashedpassword', 1, 'Male');
 INSERT INTO users (user_name, name, surname, birthday, email, password, role_id, gender)
-VALUES ('user1', 'John', 'Doe', '1995-05-15', 'user1@example.com', 'hashedpassword', 2, 'MALE');
+VALUES ('user1', 'John', 'Doe', '1995-05-15', 'user1@example.com', 'hashedpassword', 2, 'Male');
 
 --accounts
 INSERT INTO accounts (account_type, user_id, balance, currency, created_at)

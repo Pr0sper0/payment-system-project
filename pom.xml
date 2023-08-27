@@ -33,7 +33,6 @@
     <hibernate.jpamodelgen.version>5.6.8.Final</hibernate.jpamodelgen.version>
     <javax.persistence-api>2.2</javax.persistence-api>
     <querydsl.version>5.0.0</querydsl.version>
-
   </properties>
 
   <dependencyManagement>
@@ -91,6 +90,29 @@
     </resources>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>4.23.0</version>
+          <configuration>
+            <propertyFile>${project.basedir}/service/src/main/resources/liquibase.yaml</propertyFile>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.postgresql</groupId>
+              <artifactId>postgresql</artifactId>
+            </dependency>
+            <dependency>
+              <groupId>org.hibernate</groupId>
+              <artifactId>hibernate-core</artifactId>
+            </dependency>
+            <dependency>
+              <groupId>javax.xml.bind</groupId>
+              <artifactId>jaxb-api</artifactId>
+              <version>2.3.1</version>
+            </dependency>
+          </dependencies>
+        </plugin>
         <!-- Spring Boot Maven Plugin -->
         <plugin>
           <groupId>org.springframework.boot</groupId>

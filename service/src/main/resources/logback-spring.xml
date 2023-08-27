@@ -1,13 +1,13 @@
 <configuration>
   <springProperty scope="context" name="logFilePattern" source="spring.log.file.pattern"/>
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <encoder>
-      <pattern>${logFilePattern}</pattern>
-    </encoder>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>./logs/payment-backend-logs.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
-    </rollingPolicy>
-  </appender>
+<!--  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--    <encoder>-->
+<!--      <pattern>${logFilePattern}</pattern>-->
+<!--    </encoder>-->
+<!--    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--      <fileNamePattern>./logs/payment-backend-logs.%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>-->
+<!--    </rollingPolicy>-->
+<!--  </appender>-->
 
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -15,8 +15,7 @@
     </encoder>
   </appender>
 
-  <root level="WARN">
-    <appender-ref ref="FILE"/>
+  <root level="INFO">
     <appender-ref ref="CONSOLE"/>
   </root>
 </configuration>

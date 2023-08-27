@@ -1,0 +1,30 @@
+project:
+  version: ${project.version}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+#logging:
+#  level:
+#    root: INFO
+#  console:
+#    name: logs/app.log
+
+#spring:
+#  log:
+#    console:
+#      pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
+  liquibase:
+    change-log: /dbchangelog/db.changelog-master.yaml

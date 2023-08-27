@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset tarasov:1
 CREATE TABLE roles
 (
     id   SERIAL PRIMARY KEY,
@@ -6,7 +9,9 @@ CREATE TABLE roles
     created_at TIMESTAMP,
     updated_at TIMESTAMP DEFAULT NULL
 );
+--rollback DROP TABLE roles;
 
+--changeset tarasov:2
 CREATE TABLE IF NOT EXISTS users
 (
     id BIGSERIAL PRIMARY KEY ,
@@ -20,7 +25,9 @@ CREATE TABLE IF NOT EXISTS users
     gender VARCHAR(16),
     FOREIGN KEY (role_id) REFERENCES roles (id)
     );
+--rollback DROP TABLE users;
 
+--changeset tarasov:3
 CREATE TABLE accounts
 (
     id         SERIAL PRIMARY KEY,
@@ -32,8 +39,9 @@ CREATE TABLE accounts
     updated_at TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+--rollback DROP TABLE accounts;
 
-
+--changeset tarasov:4
 CREATE TABLE cards
 (
     id SERIAL PRIMARY KEY,
@@ -47,7 +55,9 @@ CREATE TABLE cards
     deleted_at TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES accounts (account_id)
 );
+--rollback DROP TABLE cards;
 
+--changeset tarasov:5
 CREATE TABLE products
 (
     id SERIAL PRIMARY KEY,
@@ -59,8 +69,9 @@ CREATE TABLE products
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
 );
+--rollback DROP TABLE products;
 
-
+--changeset tarasov:6
 CREATE TABLE orders
 (
     id SERIAL PRIMARY KEY,
@@ -74,3 +85,4 @@ CREATE TABLE orders
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (product_id) REFERENCES products (product_id)
 );
+--rollback DROP TABLE orders;
