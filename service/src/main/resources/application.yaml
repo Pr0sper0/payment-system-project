@@ -2,6 +2,10 @@ project:
   version: ${project.version}
 
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/html/
+      suffix: .html
   datasource:
     url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
@@ -15,7 +19,7 @@ spring:
         show_sql: true
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+    open-in-view: false
 #logging:
 #  level:
 #    root: INFO
@@ -27,4 +31,4 @@ spring:
 #    console:
 #      pattern: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n'
   liquibase:
-    change-log: /dbchangelog/db.changelog-master.yaml
+    change-log: /db/changelog/db.changelog-master.yaml
